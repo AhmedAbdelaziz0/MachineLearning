@@ -1,6 +1,5 @@
 import numpy as np
 from sklearn.decomposition import PCA
-import time
 
 
 def myPCA(data, number_of_components=2):
@@ -28,14 +27,6 @@ def sklearn_PCA(data, number_of_components):
     return pca.transform(data)
 
 
-def fix_sign(sk, me):
-    sign_sk = np.sign(sk[0])
-    sign_me = np.sign(me[0])
-    mismatch = sign_me != sign_sk
-
-    me[:, mismatch] *= -1
-    return me
-
 def cosine_distance(A, B):
     A = A.T
     B = B.T
@@ -51,7 +42,6 @@ if __name__ == "__main__":
     data = np.random.rand(20, 100)
     T = []
     for components in range(1, data.shape[0]):
-        t1 = time.time_ns()
         sk = np.array(sklearn_PCA(data, components))
         me = np.array(myPCA(data, components))
         print(f"Cosine distance {components}: {cosine_distance(sk, me)}")
