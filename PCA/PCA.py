@@ -2,7 +2,7 @@ import numpy as np
 from sklearn.decomposition import PCA
 
 
-def myPCA(data, number_of_components=2):
+def myPCA(data, number_of_components=2, percentage=1.0):
     X = np.array(data)
 
     # standardized
@@ -16,8 +16,15 @@ def myPCA(data, number_of_components=2):
     eigenvalues, eigenvectors = np.linalg.eig(covariance)
     eigenvectors = np.real(eigenvectors)
 
-    # explained_variance = eigenvalues / np.sum(eigenvalues)
-    # print("Explained Variance:", explained_variance)
+    explained_variance = eigenvalues / np.sum(eigenvalues)
+    print("Explained Variance:", explained_variance)
+    k = 0
+
+    for i, v in enumerate(explained_variance):
+        k += v
+        if percentage >= k:
+            number_of_components = i
+
 
     idx = np.argsort(eigenvalues)[::-1]
     idx = idx[:number_of_components]
@@ -25,7 +32,7 @@ def myPCA(data, number_of_components=2):
 
     # PCA
     X_reduced = np.dot(X_zero_mean, sorted_eigenvectors_subset)
-    return X_reduced
+    return X_reduced, number_of_components
 
 
 def sklearn_PCA(data, number_of_components):
@@ -50,9 +57,11 @@ def cosine_distance(A, B):
 
 if __name__ == "__main__":
     data = np.random.rand(3, 4)
-    T = []
-    for components in range(1, data.shape[0]):
-        sk = np.array(sklearn_PCA(data, components))
-        me = myPCA(data, components)
-        # print(f"Cosine distance {components}: {cosine_distance(sk, me)}")
-        print(np.all(np.logical_or(np.isclose(sk, me), np.isclose(sk, -me))))
+    T, k = myPCA(data, percentage=1)
+    print(T, k)
+    # T = []
+    # for components in range(1, data.shape[0]):
+    #     sk = np.array(sklearn_PCA(data, components))
+    #     me = myPCA(data, components)
+    #     # print(f"Cosine distance {components}: {cosine_distance(sk, me)}")
+    #     print(np.all(np.logical_or(np.isclose(sk, me), np.isclose(sk, -me))))
