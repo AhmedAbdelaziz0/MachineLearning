@@ -4,7 +4,7 @@ Machine Learning Algorithms for the Course
 Implemented Algorithms in Python:
 - [X] Linear Regression
 - [ ] Logistic Regression
-- [ ] K-Nearest Neighbors (KNN)
+- [X] K-Nearest Neighbors (KNN)
 - [ ] Decision Tree
 - [ ] K-Means
 - [X] Principal Component Analysis (PCA)
@@ -16,3 +16,5 @@ Implemented Algorithms in Python:
 - [ ] Expectation-Maximization (EM)
 - [ ] Hidden Markov Model (HMM)
 - [ ] Neural Network
+
+RANSAC algorithm for outlier detection
