@@ -42,7 +42,6 @@ def test_random(dim, features, k, data_size, test_size):
     # print(np.sum(myKnn == skKnn) / len(myKnn))
     return np.all(myKnn == skKnn)
 
-# micro f1
 def score(prediction, labels):
     return np.sum(prediction == labels) / len(labels)
 

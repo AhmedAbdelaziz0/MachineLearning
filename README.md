@@ -3,7 +3,7 @@ Machine Learning Algorithms for the Course
 
 Implemented Algorithms in Python:
 - [X] Linear Regression
-- [ ] Logistic Regression
+- [X] Logistic Regression
 - [X] K-Nearest Neighbors (KNN)
 - [ ] Decision Tree
 - [ ] K-Means

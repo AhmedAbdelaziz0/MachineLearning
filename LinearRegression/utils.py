@@ -4,6 +4,7 @@ import numpy as np
 import pickle
 import os
 import pandas as pd
+from ..PCA.PCA import myPCA
 
 def plot_line(x, y, k, b, line_label='Fitted line', color='r'):
     plt.plot(x, y, 'o', label='Original data', markersize=10)
@@ -145,6 +146,6 @@ def prepare_dataset(df):
     df = one_hot_encode(df, 'weather_main')
     df = one_hot_encode(df, 'weather_description')
     df = to_date_time(df)
-    # df.drop(columns=['holiday', 'weather_main', 'weather_description', 'date_time'], inplace=True)
     df = normalize_dataset(df)
+    df = pd.DataFrame(myPCA(df.to_numpy(), percentage=0.95))
     return df
