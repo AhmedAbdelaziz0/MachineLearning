@@ -46,7 +46,12 @@ def score(prediction, labels):
     return np.sum(prediction == labels) / len(labels)
 
 if __name__ == "__main__":
-    X, y = load_dataset()
+    X, y = load_dataset(id=53, name="iris")
+    y = y.replace("Iris-setosa", 0)
+    y = y.replace("Iris-versicolor", 1)
+    y = y.replace("Iris-virginica", 2)
+    y = y.infer_objects()
+
     X = prepare_dataset(X)
     train_X, test_X, train_y, test_y = train_test_split(X, y, test_size=0.2)
     train_X = train_X.to_numpy()

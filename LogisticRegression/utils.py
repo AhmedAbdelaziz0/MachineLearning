@@ -64,11 +64,13 @@ def train_test_split(X, y, test_size=0.2):
 
     return train_X, test_X, train_y, test_y
 
-def prepare_dataset(df):
+def prepare_dataset(df, do_one_hot_encode=False, column_names=[]):
     """
     one hot encode
     normalize
     """
-    df = one_hot_encode(df, 'Sex')
+    if do_one_hot_encode:
+        for column_name in column_names:
+            df = one_hot_encode(df, column_name)
     df = normalize_dataset(df)
     return df
